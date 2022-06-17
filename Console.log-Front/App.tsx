@@ -1,7 +1,7 @@
-/* eslint-disable react/jsx-filename-extension */
-import React from 'react';
 import { StatusBar } from 'expo-status-bar';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { TextInput } from 'react-native-paper';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,11 +12,19 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function App() {
+const App = () => {
   return (
     <View style={styles.container}>
-      <Text>TESTEa</Text>
-      <StatusBar />
+      <Text>Open up App.tsx to start working on your app!</Text>
+      <TextInput
+          mode="outlined"
+          label="Outlined input"
+          placeholder="Type something"
+          right={<TextInput.Affix text="/100" />}
+        />
+      <StatusBar style="auto" />
     </View>
   );
 }
+
+export default App;
