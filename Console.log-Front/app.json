@@ -1,4 +1,35 @@
 {
-  "name": "Console_log_Front",
-  "displayName": "Console_log_Front"
+  "expo": {
+    "name": "console-log-front",
+    "slug": "console-log-front",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.matheus.rubio.consolelogfront"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.matheus.rubio.consolelogfront"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
 }
