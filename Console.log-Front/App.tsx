@@ -1,30 +1,18 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import { TextInput } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './src/screens/Login';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+const RootStack = createNativeStackNavigator();
 
-const App = () => {
+const App: React.FC = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <TextInput
-          mode="outlined"
-          label="Outlined input"
-          placeholder="Type something"
-          right={<TextInput.Affix text="/100" />}
-        />
-      <StatusBar style="auto" />
-    </View>
+    <NavigationContainer>
+      <RootStack.Navigator initialRouteName="Login">
+        <RootStack.Screen name="Login" component={Login} />
+      </RootStack.Navigator>
+    </NavigationContainer>
   );
-}
+};
 
 export default App;
