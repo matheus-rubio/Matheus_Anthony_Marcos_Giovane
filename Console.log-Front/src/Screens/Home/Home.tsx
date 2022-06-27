@@ -13,16 +13,8 @@ const styles = StyleSheet.create({
 });
 
 const Home: React.FC = ({ route, navigation }) => {
-  React.useEffect(() => {
-    navigation.setOptions({
-      headerShown: false,
-    });
-  });
-
   return (
     <View style={styles.container}>
-      <NavBar route={route} navigation={navigation} />
-      <View style={{ width: '100%' }} />
       <Text>Home</Text>
     </View>
   );

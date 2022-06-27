@@ -68,7 +68,6 @@ const Login: React.FC = () => {
               user_name: 'JAOZIN',
               user_password: 'password',
             });
-            navigation.navigate(ScreenRoutes.HOME as never);
           }}
         >
           Login

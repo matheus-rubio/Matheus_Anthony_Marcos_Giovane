@@ -25,26 +25,39 @@ const AuthStack: React.FC = () => (
 );
 
 const DrawerStack: React.FC = () => (
-  <Drawer.Navigator initialRouteName="Home">
+  <Drawer.Navigator
+    initialRouteName="Home"
+    screenOptions={{
+      headerStyle: { backgroundColor: '#2F72BC' },
+      headerTintColor: '#FFFFFF',
+      drawerStyle: { backgroundColor: '#2F72BC' },
+      drawerActiveTintColor: '#FFFFFF',
+      drawerInactiveTintColor: '#a8a8a8',
+    }}
+  >
     <Drawer.Screen name={ScreenRoutes.HOME} component={Home} />
     <Drawer.Screen name={ScreenRoutes.PROFILE} component={Profile} />
   </Drawer.Navigator>
 );
 
-const App: React.FC = () => {
+const Routes: React.FC = () => {
   const { user: userLoggedIn } = useContext(AuthUserContext);
-  console.log(userLoggedIn);
+  return (
+    <RootStack.Navigator screenOptions={{ headerShown: false }}>
+      {!userLoggedIn ? (
+        <RootStack.Screen name="Auth" component={AuthStack} />
+      ) : (
+        <RootStack.Screen name="App" component={DrawerStack} />
+      )}
+    </RootStack.Navigator>
+  );
+};
 
+const App: React.FC = () => {
   return (
     <NavigationContainer>
       <AuthUserProvider>
-        <RootStack.Navigator screenOptions={{ headerShown: false }}>
-          {!userLoggedIn ? (
-            <RootStack.Screen name="Auth" component={AuthStack} />
-          ) : (
-            <RootStack.Screen name="App" component={DrawerStack} />
-          )}
-        </RootStack.Navigator>
+        <Routes />
       </AuthUserProvider>
     </NavigationContainer>
   );
