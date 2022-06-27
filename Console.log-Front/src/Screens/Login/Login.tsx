@@ -1,9 +1,11 @@
 /* eslint-disable global-require */
 import { View, Text, StyleSheet, Image } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
 import { Button, IconButton, TextInput } from 'react-native-paper';
 import { StatusBar } from 'expo-status-bar';
 import { useNavigation } from '@react-navigation/native';
+import { ScreenRoutes } from '../../Enums/ScreenRoutes';
+import AuthUserContext from '../../Contexts/AuthUserContext/context';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,12 +16,13 @@ const styles = StyleSheet.create({
 });
 
 const Login: React.FC = () => {
+  const { setActiveUser } = useContext(AuthUserContext);
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <Image
         style={{ width: 234, height: 118, marginTop: 130 }}
-        source={require('../../assets/console-log.png')}
+        source={require('../../Assets/console-log.png')}
       />
       <TextInput
         mode="outlined"
@@ -48,7 +51,7 @@ const Login: React.FC = () => {
           mode="contained"
           color="#FFFFFF"
           onPress={() => {
-            navigation.navigate('Registration');
+            navigation.navigate(ScreenRoutes.REGISTRATION as never);
           }}
         >
           <Text style={{ color: '#2F72BC' }}>Criar conta</Text>
@@ -58,7 +61,14 @@ const Login: React.FC = () => {
           mode="contained"
           color="#2F72BC"
           onPress={() => {
-            navigation.navigate('Home');
+            setActiveUser({
+              id: 1,
+              user_email: 'teste@teste.com',
+              user_fullname: 'JAOZIN DO GRAU',
+              user_name: 'JAOZIN',
+              user_password: 'password',
+            });
+            navigation.navigate(ScreenRoutes.HOME as never);
           }}
         >
           Login

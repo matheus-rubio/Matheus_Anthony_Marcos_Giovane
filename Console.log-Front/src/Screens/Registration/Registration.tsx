@@ -25,7 +25,7 @@ const Registration: React.FC = () => {
         <Avatar.Image
           style={{ marginTop: 64, marginBottom: 20 }}
           size={92}
-          source={require('../../assets/no-profile-photo.jpg')}
+          source={require('../../Assets/no-profile-photo.jpg')}
         />
         <IconButton
           icon="plus"
