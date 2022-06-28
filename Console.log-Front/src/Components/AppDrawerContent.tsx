@@ -1,14 +1,12 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import {
   DrawerContentScrollView,
   DrawerItem,
   DrawerItemList,
-} from '@react-navigation/drawer';
-import React, { useContext } from 'react';
-import { View } from 'react-native';
-import AuthUserContext from '../Contexts/AuthUserContext/context';
+} from "@react-navigation/drawer";
+import React, { useContext } from "react";
+import AuthUserContext from "../Contexts/AuthUserContext/context";
 
-const AppDrawerContent: React.FC = props => {
+const AppDrawerContent: React.FC = (props) => {
   const { logout } = useContext(AuthUserContext);
   return (
     <DrawerContentScrollView {...props} contentContainerStyle={{ flex: 1 }}>
@@ -19,7 +17,7 @@ const AppDrawerContent: React.FC = props => {
           logout();
         }}
         inactiveTintColor="#FFFFFF"
-        style={{ flex: 1, justifyContent: 'flex-end' }}
+        style={{ flex: 1, justifyContent: "flex-end" }}
       />
     </DrawerContentScrollView>
   );
