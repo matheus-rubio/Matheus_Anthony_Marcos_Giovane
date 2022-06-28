@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import React from 'react';
-import User from '../../Models/User';
+import React from "react";
+import User from "../../Models/User";
 
 interface ContextValues {
   user?: User | null;

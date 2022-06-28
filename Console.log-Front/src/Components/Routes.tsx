@@ -1,8 +1,8 @@
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import React, { useContext } from 'react';
-import AuthUserContext from '../Contexts/AuthUserContext/context';
-import AuthStack from './AuthStack';
-import DrawerStack from './DrawerStack';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import React, { useContext } from "react";
+import AuthUserContext from "../Contexts/AuthUserContext/context";
+import AuthStack from "./AuthStack";
+import DrawerStack from "./DrawerStack";
 
 const Routes: React.FC = () => {
   const RootStack = createNativeStackNavigator();
