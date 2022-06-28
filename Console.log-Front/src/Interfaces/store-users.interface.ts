@@ -1,5 +1,4 @@
-interface User {
-  id?: number;
+export interface IStoreUser {
   nm_user: string;
 
   email: string;
@@ -10,5 +9,3 @@ interface User {
 
   registration: string;
 }
-
-export default User;
