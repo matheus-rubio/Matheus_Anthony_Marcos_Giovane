@@ -1,8 +1,7 @@
-/* eslint-disable react/jsx-no-constructed-context-values */
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import User from '../../Models/User';
-import AuthUserContext from './context';
+import React, { useState } from "react";
+import User from "../../Models/User";
+import AuthUserContext from "./context";
 
 interface ProviderProps {
   children: React.ReactNode;

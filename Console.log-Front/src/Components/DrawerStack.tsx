@@ -1,15 +1,17 @@
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import React from "react";
+import React, { useContext } from "react";
 import { Avatar, IconButton } from "react-native-paper";
 import { ScreenRoutes } from "../Enums/ScreenRoutes";
 import Home from "../Screens/Home/Home";
 import Profile from "../Screens/Profile/Profile";
 import AppDrawerContent from "./AppDrawerContent";
 import { useNavigation } from "@react-navigation/native";
+import AuthUserContext from "../Contexts/AuthUserContext/context";
 
 const DrawerStack: React.FC = () => {
   const Drawer = createDrawerNavigator();
   const navigation = useNavigation();
+  const { user } = useContext(AuthUserContext);
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -22,12 +24,13 @@ const DrawerStack: React.FC = () => {
         headerRight: () => (
           <IconButton
             style={{ borderWidth: 2, borderColor: "#FFFFFF", marginRight: 16 }}
-            icon={() => (
-              <Avatar.Image
-                size={32}
-                source={require("../Assets/no-profile-photo.jpg")}
-              />
-            )}
+            icon={() => {
+              const image =
+                user?.type === "S"
+                  ? require("../Assets/aluno.png")
+                  : require("../Assets/professor.jpg");
+              return <Avatar.Image size={32} source={image} />;
+            }}
             size={22}
             onPress={() => navigation.navigate(ScreenRoutes.PROFILE as never)}
           />
