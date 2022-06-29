@@ -7,6 +7,7 @@ import { UserController } from './user.modules/user.controller';
 import { UserService } from './user.modules/user.service';
 import { UserModules } from './user.modules/user.module';
 import { QuizModules } from './quiz.module.ts/quiz.module';
+import { SubjectModules } from './subjects.module/subjects.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { QuizModules } from './quiz.module.ts/quiz.module';
     ),
     UserModules,
     QuizModules,
+    SubjectModules,
   ],
   controllers: [AppController],
   providers: [AppService],
