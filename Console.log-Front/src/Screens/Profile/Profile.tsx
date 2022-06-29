@@ -1,6 +1,4 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable global-require */
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView } from 'react-native';
 import React from 'react';
 
 const styles = StyleSheet.create({
@@ -9,13 +7,88 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
   },
+  containerHeader: {
+    flex: 0.3,
+    width: '100%',
+    backgroundColor: '#2F72BC',
+    alignItems: 'center',
+  }, 
+  containerImage: {
+    margin: -130,
+    width: 250,
+    height: 250,
+    backgroundColor: '#fff' ,
+    alignItems: 'center',
+    borderRadius: 150,
+    elevation: 10,
+  },
+  containerInformation:{
+       justifyContent: 'center',
+       alignItems:'center',
+       height: 50,
+       width: '150%',
+       backgroundColor: '#2F72BC',
+       flexDirection: 'row',
+       marginTop: 10,
+       borderRadius: 30,
+  },
+  containerInformationInside:{
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems:'center',
+    backgroundColor: '#fff',
+    borderRadius: 30,
+    width: '99%',
+    height: 47,
+  },
+  image: {
+    width: 240,
+    height: 240,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 150,
+    margin: 5,
+  },
+  textoNome:{
+     fontSize: 20,
+     margin: 5,
+  },
+  textoTipo:{
+    fontSize: 15,
+  },
+  textoMdelha:{
+    marginRight: 120,
+    color: '#FFB200',
+ },
+ textoQuiz:{
+   color: '#2F72BC',
+ },
+ containerMedalhas:{
+   backgroundColor: '2F72BC',
+ }
+ 
+
 });
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Profile: React.FC = ({ route, navigation }) => {
   return (
     <View style={styles.container}>
-      <Text>Profile</Text>
+        <View style={styles.containerHeader}></View>
+        <View style={styles.containerImage}>
+        <Image
+        style={styles.image}
+        source={require('../../Assets/aluno.png')}
+        />
+        <Text style={styles.textoNome}>Ronaldo Nazário</Text>
+        <Text style={styles.textoTipo}>Aluno</Text>
+        <View style={styles.containerInformation}>
+          <View style={styles.containerInformationInside}>
+            <Text style={styles.textoMdelha}>Medalhas</Text>
+            <Text style={styles.textoQuiz}>Quizes</Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
