@@ -8,16 +8,25 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import React from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../Components/NavBar";
+import api from "../../Service/api";
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: "#ffff",
     alignItems: "center",
   },
-  container2: {
+  flatList: {
+    flex: 1,
+    backgroundColor: "#ffff",
+    alignItems: "center",
+  },
+  flatListContent: {
+    flex: 1,
+    width: "100%",
+    backgroundColor: "#ffffffa2",
     flexDirection: "row",
     alignItems: "center",
   },
@@ -32,35 +41,43 @@ const styles = StyleSheet.create({
   },
 });
 
-const discliplinas = [
-  {
-    nome: "Estrutura de dados II",
-  },
-  {
-    nome: "Teoria dos grafos",
-  },
-  {
-    nome: "Organização de computadores",
-  },
-  {
-    nome: "Sistemas Operacionais",
-  },
-];
-
 const Home: React.FC = ({ route, navigation }) => {
+  const [subjects, setSubjects] = useState<any>([]);
+
+  async function loadSUbjects() {
+    await api.get("/subjects").then((response) => {
+      setSubjects(response.data);
+    });
+  }
+
+  useEffect(() => {
+    loadSUbjects();
+  }, []);
+
   return (
     <View style={styles.container}>
       <Text style={styles.text1}>Selecione uma disciplina para comear:</Text>
       <FlatList
-        data={discliplinas}
+        style={{ width: "100%" }}
+        data={subjects}
         renderItem={({ item }) => (
-          <TouchableOpacity style={{ margin: 5 }}>
-            <View style={styles.container2}>
-              {/*<Image
-                style={{width: 50, height: 50}}
-                source={require('../../Assets/ed.png')}
-                 />*/}
-              <Text style={styles.text2}>{item.nome}</Text>
+          <TouchableOpacity
+            style={{
+              margin: 5,
+              flex: 1,
+              flexDirection: "row",
+              justifyContent: "center",
+              borderBottomWidth: 1,
+            }}
+          >
+            {
+              <Image
+                style={{ width: 50, height: 50, margin: 10 }}
+                source={require("../../Assets/logo_ufjf.jpg")}
+              />
+            }
+            <View style={styles.flatListContent}>
+              <Text style={styles.text2}>{item.nm_subject}</Text>
             </View>
           </TouchableOpacity>
         )}
