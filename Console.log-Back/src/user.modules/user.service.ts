@@ -49,7 +49,7 @@ export class UserService {
       const accessToken: string = await this.jwtService.sign(payload);
 
       const userReturn = {
-        name: user.nm_user,
+        nm_user: user.nm_user,
         email: user.email,
         type: user.type,
         accessToken,
