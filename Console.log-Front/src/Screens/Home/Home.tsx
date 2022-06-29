@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable global-require */
 import {
   View,
   Text,
@@ -11,6 +9,8 @@ import {
 import React, { useState, useEffect } from "react";
 import NavBar from "../../Components/NavBar";
 import api from "../../Service/api";
+import { Icon } from "react-native-paper/lib/typescript/components/Avatar/Avatar";
+import { Button, IconButton } from "react-native-paper";
 
 const styles = StyleSheet.create({
   container: {
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
   },
   text1: {
     margin: 30,
-    fontSize: 19,
+    fontSize: 15,
   },
   text2: {
     marginBottom: 10,
@@ -42,12 +42,24 @@ const styles = StyleSheet.create({
 });
 
 const Home: React.FC = ({ route, navigation }) => {
+  const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState<any>([]);
+  const [quiz, setQuiz] = useState<any>([]);
+  const [showSubjects, setShowSubjects] = useState<boolean>(true);
+  const [showQuiz, setShowQuiz] = useState<boolean>(false);
 
   async function loadSUbjects() {
     await api.get("/subjects").then((response) => {
       setSubjects(response.data);
     });
+  }
+
+  async function loadQuiz(_id_subject: string) {
+    await api
+      .get("/quiz", { params: { subject: _id_subject } })
+      .then((response) => {
+        setQuiz(response.data);
+      });
   }
 
   useEffect(() => {
@@ -56,32 +68,93 @@ const Home: React.FC = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text1}>Selecione uma disciplina para comear:</Text>
-      <FlatList
-        style={{ width: "100%" }}
-        data={subjects}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            style={{
-              margin: 5,
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-              borderBottomWidth: 1,
-            }}
-          >
-            {
-              <Image
-                style={{ width: 50, height: 50, margin: 10 }}
-                source={require("../../Assets/logo_ufjf.jpg")}
-              />
+      {showSubjects && (
+        <Text style={styles.text1}>Selecione uma disciplina:</Text>
+      )}
+      {showQuiz && (
+        <Text style={styles.text1}>Selecione um Quiz de {subject}:</Text>
+      )}
+
+      {showSubjects && (
+        <FlatList
+          style={{ width: "100%" }}
+          data={subjects}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "center",
+                borderBottomWidth: 1,
+              }}
+              onPress={() => {
+                setShowSubjects(false);
+                setShowQuiz(true);
+                setSubject(item.nm_subject);
+                loadQuiz(item._id);
+              }}
+            >
+              {
+                <Image
+                  style={{ width: 50, height: 50, margin: 10 }}
+                  source={require("../../Assets/logo_ufjf.jpg")}
+                />
+              }
+              <View style={styles.flatListContent}>
+                <Text style={styles.text2}>{item.nm_subject}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      )}
+      {showQuiz && (
+        <>
+          <FlatList
+            style={{ width: "100%" }}
+            data={quiz}
+            ListEmptyComponent={
+              <Text style={{ alignSelf: "center", fontSize: 18, color: "red" }}>
+                Ainda não possui nenhum Quiz para essa disciplina
+              </Text>
             }
-            <View style={styles.flatListContent}>
-              <Text style={styles.text2}>{item.nm_subject}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={{
+                  margin: 5,
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  borderBottomWidth: 1,
+                }}
+                onPress={() => {
+                  setShowSubjects(false);
+                }}
+              >
+                {
+                  <Image
+                    style={{ width: 50, height: 50, margin: 10 }}
+                    source={require("../../Assets/logo_ufjf.jpg")}
+                  />
+                }
+                <View style={styles.flatListContent}>
+                  <Text style={styles.text2}>{item.title}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+          <IconButton
+            icon="arrow-left-circle"
+            size={30}
+            color="#E4B423"
+            onPress={() => {
+              setShowSubjects(true);
+              setShowQuiz(false);
+              setQuiz([]);
+            }}
+          />
+        </>
+      )}
     </View>
   );
 };

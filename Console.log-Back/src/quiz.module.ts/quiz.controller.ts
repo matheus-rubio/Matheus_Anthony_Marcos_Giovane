@@ -5,6 +5,7 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Query,
   Res,
 } from '@nestjs/common';
 import { QuizCreateDto } from './dto/quiz-create.dto';
@@ -22,6 +23,27 @@ export class QuizController {
 
       if (result instanceof Error) {
         throw new Error('O correu um quiz de pedidos.');
+      }
+
+      return result;
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Get('quiz')
+  async list(@Query() filterDto: any): Promise<Quiz[] | HttpException> {
+    try {
+      const result = await this.quizService.list(filterDto);
+
+      if (result instanceof Error) {
+        throw new Error('O correu na listagem.');
       }
 
       return result;
