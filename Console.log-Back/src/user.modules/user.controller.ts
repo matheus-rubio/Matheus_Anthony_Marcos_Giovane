@@ -7,6 +7,7 @@ import {
   Post,
   Res,
 } from '@nestjs/common';
+import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import { User } from './user.schema';
 import { UserService } from './user.service';
 
@@ -33,5 +34,12 @@ export class UserController {
         HttpStatus.BAD_REQUEST,
       );
     }
+  }
+
+  @Post('/signin')
+  signIn(
+    @Body() authCredentialsDto: AuthCredentialsDto,
+  ): Promise<{ accessToken: string }> {
+    return this.userService.signIn(authCredentialsDto);
   }
 }
