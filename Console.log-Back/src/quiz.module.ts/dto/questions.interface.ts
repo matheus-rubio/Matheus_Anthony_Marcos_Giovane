@@ -1,4 +1,6 @@
+import { iAlternatives } from './alternatives.interface';
+
 export interface IQuestions {
   title: string;
-  is_correct: boolean;
+  alternative: iAlternatives[];
 }

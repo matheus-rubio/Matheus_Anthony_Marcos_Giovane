@@ -45,9 +45,7 @@ const Registration: React.FC = () => {
         console.log(response.data);
         setActiveUser(response.data);
       })
-      .catch((error) => {
-        console.log(error.message);
-      });
+      .catch((error) => {});
   };
 
   return (
