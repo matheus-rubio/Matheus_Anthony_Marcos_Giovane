@@ -8,6 +8,7 @@ import {
   Res,
 } from '@nestjs/common';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { UserCreateDto } from './dto/userCreate.dto';
 import { User } from './user.schema';
 import { UserService } from './user.service';
 
@@ -16,7 +17,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post('users')
-  async store(@Body() usersDto: any): Promise<User | HttpException> {
+  async store(@Body() usersDto: UserCreateDto): Promise<User | HttpException> {
     try {
       const result = await this.userService.store(usersDto);
 

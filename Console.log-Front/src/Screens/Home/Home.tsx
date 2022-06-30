@@ -6,11 +6,15 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
+
 import React, { useState, useEffect } from "react";
-import NavBar from "../../Components/NavBar";
 import api from "../../Service/api";
 import { Icon } from "react-native-paper/lib/typescript/components/Avatar/Avatar";
 import { Button, IconButton } from "react-native-paper";
+
+import { ScreenRoutes } from "../../Enums/ScreenRoutes";
+
+import { useNavigation } from "@react-navigation/native";
 
 const styles = StyleSheet.create({
   container: {
@@ -155,6 +159,11 @@ const Home: React.FC = ({ route, navigation }) => {
           />
         </>
       )}
+      <Button
+        onPress={() => navigation.navigate(ScreenRoutes.NEWQUIZ as never)}
+      >
+        OPA
+      </Button>
     </View>
   );
 };

@@ -3,4 +3,5 @@ export enum ScreenRoutes {
   REGISTRATION = "Registro",
   LOGIN = "Login",
   PROFILE = "Perfil",
+  NEWQUIZ = "Novo Quiz"
 }

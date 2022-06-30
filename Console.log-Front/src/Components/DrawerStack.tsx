@@ -4,6 +4,7 @@ import { Avatar, IconButton } from "react-native-paper";
 import { ScreenRoutes } from "../Enums/ScreenRoutes";
 import Home from "../Screens/Home/Home";
 import Profile from "../Screens/Profile/Profile";
+import NewQuiz from "../Screens/NewQuiz/NewQuiz";
 import AppDrawerContent from "./AppDrawerContent";
 import { useNavigation } from "@react-navigation/native";
 import AuthUserContext from "../Contexts/AuthUserContext/context";
@@ -46,6 +47,7 @@ const DrawerStack: React.FC = () => {
           drawerItemStyle: { display: "none" },
         }}
       />
+      <Drawer.Screen name={ScreenRoutes.NEWQUIZ} component={NewQuiz} />
     </Drawer.Navigator>
   );
 };
