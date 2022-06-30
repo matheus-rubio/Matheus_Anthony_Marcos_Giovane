@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import React, { useState, useEffect } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import api from "../../Service/api";
 import { Icon } from "react-native-paper/lib/typescript/components/Avatar/Avatar";
-import { Button, IconButton } from "react-native-paper";
+import { Button, IconButton, Appbar } from "react-native-paper";
 
+import AuthUserContext from "../../Contexts/AuthUserContext/context";
 import { ScreenRoutes } from "../../Enums/ScreenRoutes";
 
 import { useNavigation } from "@react-navigation/native";
@@ -43,9 +44,18 @@ const styles = StyleSheet.create({
     fontSize: 18,
     marginLeft: 10,
   },
+  bottom: {
+    backgroundColor: "#2F72BC",
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
+  },
 });
 
 const Home: React.FC = ({ route, navigation }) => {
+  const { user } = useContext(AuthUserContext);
+
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState<any>([]);
   const [quiz, setQuiz] = useState<any>([]);
@@ -72,6 +82,7 @@ const Home: React.FC = ({ route, navigation }) => {
 
   return (
     <View style={styles.container}>
+      {user?.type == "T" && showQuiz && <Appbar style={styles.bottom}></Appbar>}
       {showSubjects && (
         <Text style={styles.text1}>Selecione uma disciplina:</Text>
       )}
@@ -147,23 +158,37 @@ const Home: React.FC = ({ route, navigation }) => {
               </TouchableOpacity>
             )}
           />
-          <IconButton
-            icon="arrow-left-circle"
-            size={30}
-            color="#E4B423"
-            onPress={() => {
-              setShowSubjects(true);
-              setShowQuiz(false);
-              setQuiz([]);
+          <View
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              marginBottom: "0.75rem",
             }}
-          />
+          >
+            <IconButton
+              icon="arrow-left-circle"
+              size={45}
+              color="#E4B423"
+              onPress={() => {
+                setShowSubjects(true);
+                setShowQuiz(false);
+                setQuiz([]);
+              }}
+            />
+            {user?.type == "T" && (
+              <IconButton
+                icon="plus-circle"
+                size={45}
+                color="#E4B423"
+                onPress={() =>
+                  navigation.navigate(ScreenRoutes.NEWQUIZ as never)
+                }
+              />
+            )}
+          </View>
+          {/* () => navigation.navigate(ScreenRoutes.NEWQUIZ as never) */}
         </>
       )}
-      <Button
-        onPress={() => navigation.navigate(ScreenRoutes.NEWQUIZ as never)}
-      >
-        OPA
-      </Button>
     </View>
   );
 };
