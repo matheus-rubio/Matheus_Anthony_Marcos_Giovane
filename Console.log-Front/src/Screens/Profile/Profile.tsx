@@ -12,7 +12,8 @@ const Profile: React.FC = ({ route, navigation }) => {
       ? require("../../Assets/aluno.png")
       : require("../../Assets/professor.jpg");
 
-  const medalhas =['Top 1 - Estrutura de daddos', 'Top 1 - Teoria dos Grafos ', 'Top 2 - Algoritmos' ]
+  const medalhas =['Top 1 - Estrutura de dados', 'Top 1 - Teoria dos Grafos ', 'Top 2 - Algoritmos', 
+  'Top 2 - Orientação a Objetos', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica' ]
 
   return (
    
@@ -28,16 +29,15 @@ const Profile: React.FC = ({ route, navigation }) => {
             <Text style={styles.textoMdelha}>Medalhas</Text>
             <Text style={styles.textoQuiz}>Quizes</Text>
           </View>
-          <ScrollView style={styles.containerMedalhas}>
-            {/*<FlatList
+            <FlatList
+            style={styles.containerMedalhas}
              data ={medalhas}  
                 renderItem= {({item})=>(
                   <View style={styles.conteinerContextMedalhas}>
-                  <Text style={styles.textoTipo}>{item}</Text>
+                  <Text style={styles.textoInfoMedalha}>{item}</Text>
                   </View>
                 )}  
-                />*/}
-          </ScrollView>
+                />
         </View>
       </View>
      </View>
@@ -93,16 +93,17 @@ const styles = StyleSheet.create({
    width: '100%',
    borderRadius: 30,
    position: 'absolute',
+   marginBottom: 10,
   },
   conteinerContextMedalhas: {
       marginLeft: 20,
        backgroundColor: "#EEDDAA",
        width: '90%',
-       height: '100%',
+       height: 65,
        justifyContent: 'center',
        alignItems: 'center',
-       marginTop: 20,
-       borderRadius: 30,
+       margin: 7,
+       borderRadius: 20,
   },
   image: {
     width: 240,
@@ -122,6 +123,9 @@ const styles = StyleSheet.create({
   textoMdelha: {
     marginRight: 120,
     color: "#FFB200",
+  },
+  textoInfoMedalha:{
+    fontSize: 20,
   },
   textoQuiz: {
     color: "#2F72BC",
