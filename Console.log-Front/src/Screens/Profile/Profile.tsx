@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   conteinerContextMedalhas: {
       marginLeft: 20,
-       backgroundColor: "#EEDDAA",
+       backgroundColor: "#FFBC2B",
        width: '90%',
        height: 65,
        justifyContent: 'center',

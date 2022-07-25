@@ -8,6 +8,7 @@ import NewQuiz from "../Screens/NewQuiz/NewQuiz";
 import AppDrawerContent from "./AppDrawerContent";
 import { useNavigation } from "@react-navigation/native";
 import AuthUserContext from "../Contexts/AuthUserContext/context";
+import Ranking from "../Screens/Ranking/Ranking";
 
 const DrawerStack: React.FC = () => {
   const Drawer = createDrawerNavigator();
@@ -48,6 +49,7 @@ const DrawerStack: React.FC = () => {
         }}
       />
       <Drawer.Screen name={ScreenRoutes.NEWQUIZ} component={NewQuiz} />
+      <Drawer.Screen name={ScreenRoutes.RANKING} component={Ranking} />
     </Drawer.Navigator>
   );
 };
