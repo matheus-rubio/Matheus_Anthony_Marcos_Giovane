@@ -89,9 +89,10 @@ const styles = StyleSheet.create({
       justifyContent: "center",
       alignItems: "center",
       backgroundColor: "#2F72BC",
-      width: "40%",
-      height:  "4%",
+      width: "45%",
+      height:  "5%",
       marginBottom: 40,
+      borderRadius: 5,
     },
     textInfoCurso: {
       fontSize: 20,
