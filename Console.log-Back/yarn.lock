@@ -668,9 +668,9 @@
     webpack "5.72.1"
     webpack-node-externals "3.0.0"
 
-"@nestjs/common@^8.0.0":
+"@nestjs/common@^8.4.7":
   version "8.4.7"
-  resolved "https://registry.npmjs.org/@nestjs/common/-/common-8.4.7.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-8.4.7.tgz#fc4a575b797e230bb5a0bcab6da8b796aa88d605"
   integrity sha512-m/YsbcBal+gA5CFrDpqXqsSfylo+DIQrkFY3qhVIltsYRfu8ct8J9pqsTO6OPf3mvqdOpFGrV5sBjoyAzOBvsw==
   dependencies:
     axios "0.27.2"
@@ -680,7 +680,7 @@
 
 "@nestjs/config@^2.1.0":
   version "2.1.0"
-  resolved "https://registry.npmjs.org/@nestjs/config/-/config-2.1.0.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/config/-/config-2.1.0.tgz#334d6c3211f288eb40b1f8e2dbfbaf50b538f300"
   integrity sha512-wUpt1/QJEN7xnJl4pM3c9rHrY1widq2yPOZfjaMD1//XAP9LLHTaW+RxSEG6BSGIm3w4wGtjco+gKNB2WL7yRg==
   dependencies:
     dotenv "16.0.1"
@@ -688,9 +688,9 @@
     lodash "4.17.21"
     uuid "8.3.2"
 
-"@nestjs/core@^8.0.0":
+"@nestjs/core@^8.4.7":
   version "8.4.7"
-  resolved "https://registry.npmjs.org/@nestjs/core/-/core-8.4.7.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/core/-/core-8.4.7.tgz#fbec7fa744ac8749a4b966f759a6656c1cf43883"
   integrity sha512-XB9uexHqzr2xkPo6QSiQWJJttyYYLmvQ5My64cFvWFi7Wk2NIus0/xUNInwX3kmFWB6pF1ab5Y2ZBvWdPwGBhw==
   dependencies:
     "@nuxtjs/opencollective" "0.3.2"
@@ -703,7 +703,7 @@
 
 "@nestjs/jwt@^8.0.1":
   version "8.0.1"
-  resolved "https://registry.npmjs.org/@nestjs/jwt/-/jwt-8.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/jwt/-/jwt-8.0.1.tgz#e00f6810705a75d5680903241f4e07272e59e6d5"
   integrity sha512-9WGfgngX8aclC/MC+CH35Ooo4iPVKc+7xLXaBV6o4ty8g2uZdPomry7cSdK/e6Lv623O/84WapThnPoAtW/jvA==
   dependencies:
     "@types/jsonwebtoken" "8.5.8"
@@ -716,17 +716,17 @@
 
 "@nestjs/mongoose@^9.1.1":
   version "9.1.1"
-  resolved "https://registry.npmjs.org/@nestjs/mongoose/-/mongoose-9.1.1.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/mongoose/-/mongoose-9.1.1.tgz#b7ef085a2ca0a04edbf2ffc18877d602f6ac891b"
   integrity sha512-sKZKI+walquKbCu3wSgO9X6a8MAkfsOlUTdPGv6IFo9NtTSp4sdrfiWFk2rQVc1N05J4Jdt94fnPKWJf+7U8uQ==
 
-"@nestjs/passport@^8.2.1":
+"@nestjs/passport@^8.2.2":
   version "8.2.2"
   resolved "https://registry.yarnpkg.com/@nestjs/passport/-/passport-8.2.2.tgz#32b3932b83740895f037eabaf812c44f5ec18b3a"
   integrity sha512-Ytbn8j7WZ4INmEntOpdJY1isTgdQqZkx5ADz8zsZ5wAp0t8tc5GF/A+GlXlmn9/yRPwZHSbmHpv7Qt2EIiNnrw==
 
-"@nestjs/platform-express@^8.0.0":
+"@nestjs/platform-express@^8.4.7":
   version "8.4.7"
-  resolved "https://registry.npmjs.org/@nestjs/platform-express/-/platform-express-8.4.7.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/platform-express/-/platform-express-8.4.7.tgz#402a3d3c47327a164bb3867615f423c29d1a6cd9"
   integrity sha512-lPE5Ltg2NbQGRQIwXWY+4cNrXhJdycbxFDQ8mNxSIuv+LbrJBIdEB/NONk+LLn9N/8d2+I2LsIETGQrPvsejBg==
   dependencies:
     body-parser "1.20.0"
@@ -748,7 +748,7 @@
 
 "@nestjs/swagger@^5.2.1":
   version "5.2.1"
-  resolved "https://registry.npmjs.org/@nestjs/swagger/-/swagger-5.2.1.tgz"
+  resolved "https://registry.yarnpkg.com/@nestjs/swagger/-/swagger-5.2.1.tgz#0fbd5dbc84aeebc2912009cce1309d4bebe9a52c"
   integrity sha512-7dNa08WCnTsW/oAk3Ujde+z64JMfNm19DhpXasFR8oJp/9pggYAbYU927HpA+GJsSFJX6adjIRZsCKUqaGWznw==
   dependencies:
     "@nestjs/mapped-types" "1.0.1"

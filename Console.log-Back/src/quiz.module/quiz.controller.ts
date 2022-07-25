@@ -4,6 +4,7 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Query,
   Res,
@@ -41,6 +42,27 @@ export class QuizController {
   async list(@Query() filterDto: any): Promise<Quiz[] | HttpException> {
     try {
       const result = await this.quizService.list(filterDto);
+
+      if (result instanceof Error) {
+        throw new Error('O correu na listagem.');
+      }
+
+      return result;
+    } catch (error) {
+      throw new HttpException(
+        {
+          status: HttpStatus.BAD_REQUEST,
+          error: error.message,
+        },
+        HttpStatus.BAD_REQUEST,
+      );
+    }
+  }
+
+  @Get('/quiz/:id')
+  async show(@Param('id') id: string): Promise<Quiz | HttpException> {
+    try {
+      const result = await this.quizService.show(id);
 
       if (result instanceof Error) {
         throw new Error('O correu na listagem.');

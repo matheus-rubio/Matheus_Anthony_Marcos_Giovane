@@ -6,8 +6,10 @@ import { ConfigModule } from '@nestjs/config';
 import { UserController } from './user.modules/user.controller';
 import { UserService } from './user.modules/user.service';
 import { UserModules } from './user.modules/user.module';
-import { QuizModules } from './quiz.modules/quiz.module';
+
 import { SubjectModules } from './subjects.module/subjects.module';
+import { Quiz } from './quiz.module/quiz.schema';
+import { QuizModules } from './quiz.module/quiz.module';
 
 @Module({
   imports: [

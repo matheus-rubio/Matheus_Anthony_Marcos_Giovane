@@ -46,4 +46,14 @@ export class QuizService {
       return error;
     }
   }
+
+  async show(id: string): Promise<Quiz | Error> {
+    try {
+      const query = this.quizModel.findById(id).exec();
+
+      return query;
+    } catch (error) {
+      return error;
+    }
+  }
 }
