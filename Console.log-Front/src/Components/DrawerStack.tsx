@@ -27,10 +27,14 @@ const DrawerStack: React.FC = () => {
           <IconButton
             style={{ borderWidth: 2, borderColor: "#FFFFFF", marginRight: 16 }}
             icon={() => {
-              const image =
-                user?.type === "S"
-                  ? require("../Assets/aluno.png")
-                  : require("../Assets/professor.jpg");
+              const image = user?.profile_picture
+                ? {
+                    uri: `data:image/jpg;base64,${Buffer.from(
+                      user?.profile_picture,
+                      "base64"
+                    ).toString()}`,
+                  }
+                : require("../Assets/no-profile-photo.jpg");
               return <Avatar.Image size={32} source={image} />;
             }}
             size={22}

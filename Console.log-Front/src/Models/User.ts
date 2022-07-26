@@ -9,6 +9,8 @@ interface User {
   type: string;
 
   registration: string;
+
+  profile_picture: Buffer;
 }
 
 export default User;

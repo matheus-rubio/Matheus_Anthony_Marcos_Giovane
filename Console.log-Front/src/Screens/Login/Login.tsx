@@ -36,7 +36,7 @@ const Login: React.FC = () => {
       })
       .catch((error) => {
         console.log(JSON.stringify(error));
-        alert("Usuário não encontraodo.");
+        alert("Usuário não encontrado.");
       });
   };
 

@@ -12,6 +12,7 @@ import api from "../../Service/api";
 import { IStoreUser } from "../../Interfaces/store-users.interface";
 import AuthUserContext from "../../Contexts/AuthUserContext/context";
 import { useNavigation } from "@react-navigation/native";
+import * as ImagePicker from "expo-image-picker";
 const styles = StyleSheet.create({
   container: {
     flexGrow: 1,
@@ -29,6 +30,7 @@ const Registration: React.FC = () => {
   const [userEmail, setEmail] = React.useState("");
   const [userRegistration, setRegistration] = React.useState("");
   const [userType, setUserType] = React.useState("S");
+  const [userProfilePicture, setUserProfilePicture] = React.useState<any>("");
 
   const handleStore = async () => {
     const storeData: IStoreUser = {
@@ -37,6 +39,7 @@ const Registration: React.FC = () => {
       registration: userRegistration,
       type: userType,
       password: userPassword,
+      profile_picture: userProfilePicture,
     };
 
     await api
@@ -45,7 +48,28 @@ const Registration: React.FC = () => {
         console.log(response.data);
         setActiveUser(response.data);
       })
-      .catch((error) => {});
+      .catch((error) => {
+        console.log(error.message);
+        alert("Erro ao registrar usuário.");
+      });
+  };
+
+  const handleUploadProfilePicture = async () => {
+    try {
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        base64: true,
+        allowsEditing: true,
+        aspect: [4, 3],
+        quality: 1,
+      });
+
+      if (!result.cancelled) {
+        setUserProfilePicture(result.base64);
+      }
+    } catch (error: any) {
+      console.log(error.message);
+    }
   };
 
   return (
@@ -54,7 +78,11 @@ const Registration: React.FC = () => {
         <Avatar.Image
           style={{ marginTop: 64, marginBottom: 20 }}
           size={92}
-          source={require("../../Assets/no-profile-photo.jpg")}
+          source={
+            userProfilePicture
+              ? { uri: `data:image/jpg;base64,${userProfilePicture}` }
+              : require("../../Assets/no-profile-photo.jpg")
+          }
         />
         <IconButton
           icon="plus"
@@ -69,7 +97,7 @@ const Registration: React.FC = () => {
           }}
           color="#FFFFFF"
           size={20}
-          onPress={() => console.log("EXECUTA A FUNÇÃO DE ADICIONAR IMAGEM")}
+          onPress={handleUploadProfilePicture}
         />
       </View>
       <TextInput

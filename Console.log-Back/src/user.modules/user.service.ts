@@ -53,6 +53,7 @@ export class UserService {
         email: user.email,
         type: user.type,
         accessToken,
+        profile_picture: user.profile_picture,
       };
       return userReturn;
     } else {

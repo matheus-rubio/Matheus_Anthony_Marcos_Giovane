@@ -1,23 +1,34 @@
-import { View, Text, StyleSheet, Image, ScrollView, FlatList } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList } from "react-native";
 import React, { useContext } from "react";
 import AuthUserContext from "../../Contexts/AuthUserContext/context";
-
-
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Profile: React.FC = ({ route, navigation }) => {
   const { user } = useContext(AuthUserContext);
-  const image =
-    user?.type === "S"
-      ? require("../../Assets/aluno.png")
-      : require("../../Assets/professor.jpg");
+  const image = user?.profile_picture
+    ? {
+        uri: `data:image/jpg;base64,${Buffer.from(
+          user?.profile_picture,
+          "base64"
+        ).toString()}`,
+      }
+    : require("../../Assets/no-profile-photo.jpg");
 
-  const medalhas =['Top 1 - Estrutura de dados', 'Top 1 - Teoria dos Grafos ', 'Top 2 - Algoritmos', 
-  'Top 2 - Orientação a Objetos', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica', 'Top 3 - Lógica' ]
+  const medalhas = [
+    "Top 1 - Estrutura de dados",
+    "Top 1 - Teoria dos Grafos ",
+    "Top 2 - Algoritmos",
+    "Top 2 - Orientação a Objetos",
+    "Top 3 - Lógica",
+    "Top 3 - Lógica",
+    "Top 3 - Lógica",
+    "Top 3 - Lógica",
+    "Top 3 - Lógica",
+    "Top 3 - Lógica",
+  ];
 
   return (
-   
-     <View style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.containerHeader}></View>
       <View style={styles.containerImage}>
         <Image style={styles.image} source={image} />
@@ -29,19 +40,18 @@ const Profile: React.FC = ({ route, navigation }) => {
             <Text style={styles.textoMdelha}>Medalhas</Text>
             <Text style={styles.textoQuiz}>Quizes</Text>
           </View>
-            <FlatList
+          <FlatList
             style={styles.containerMedalhas}
-             data ={medalhas}  
-                renderItem= {({item})=>(
-                  <View style={styles.conteinerContextMedalhas}>
-                  <Text style={styles.textoInfoMedalha}>{item}</Text>
-                  </View>
-                )}  
-                />
+            data={medalhas}
+            renderItem={({ item }) => (
+              <View style={styles.conteinerContextMedalhas}>
+                <Text style={styles.textoInfoMedalha}>{item}</Text>
+              </View>
+            )}
+          />
         </View>
       </View>
-     </View>
-  
+    </View>
   );
 };
 
@@ -87,23 +97,23 @@ const styles = StyleSheet.create({
   },
   containerMedalhas: {
     marginTop: 360,
-   backgroundColor: "#80BBE6",
-   flex: 1,
-   height: '580%',
-   width: '100%',
-   borderRadius: 30,
-   position: 'absolute',
-   marginBottom: 10,
+    backgroundColor: "#80BBE6",
+    flex: 1,
+    height: "580%",
+    width: "100%",
+    borderRadius: 30,
+    position: "absolute",
+    marginBottom: 10,
   },
   conteinerContextMedalhas: {
-      marginLeft: 20,
-       backgroundColor: "#FFBC2B",
-       width: '90%',
-       height: 65,
-       justifyContent: 'center',
-       alignItems: 'center',
-       margin: 7,
-       borderRadius: 20,
+    marginLeft: 20,
+    backgroundColor: "#FFBC2B",
+    width: "90%",
+    height: 65,
+    justifyContent: "center",
+    alignItems: "center",
+    margin: 7,
+    borderRadius: 20,
   },
   image: {
     width: 240,
@@ -124,7 +134,7 @@ const styles = StyleSheet.create({
     marginRight: 120,
     color: "#FFB200",
   },
-  textoInfoMedalha:{
+  textoInfoMedalha: {
     fontSize: 20,
   },
   textoQuiz: {

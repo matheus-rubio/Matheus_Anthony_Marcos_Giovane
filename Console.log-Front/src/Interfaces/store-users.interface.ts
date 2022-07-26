@@ -8,4 +8,6 @@ export interface IStoreUser {
   type: string;
 
   registration: string;
+
+  profile_picture: Buffer;
 }
