@@ -10,6 +10,7 @@ import { UserModules } from './user.modules/user.module';
 import { SubjectModules } from './subjects.module/subjects.module';
 import { Quiz } from './quiz.module/quiz.schema';
 import { QuizModules } from './quiz.module/quiz.module';
+import { RankingModules } from './ranking.module/ranking.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { QuizModules } from './quiz.module/quiz.module';
     UserModules,
     QuizModules,
     SubjectModules,
+    RankingModules,
   ],
   controllers: [AppController],
   providers: [AppService],
