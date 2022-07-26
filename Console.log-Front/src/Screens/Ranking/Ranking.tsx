@@ -26,8 +26,11 @@ const Ranking: React.FC = ({ route, navigation }) => {
         style={styles.containerRanking}
         data ={ranking}
         renderItem= {({item})=>(
-        <View style={styles.containerPlace}>
-          <Text style={styles.textPlace}>{item}</Text>
+        <View style={styles.containerBoxPlace}>
+          <View style={styles.containerMedal}></View>
+          <View style={styles.containerPlace}>
+            <Text style={styles.textPlace}>{item}</Text>
+          </View>
         </View>
         )}  
 
@@ -62,23 +65,41 @@ const styles = StyleSheet.create({
       height: "11%",
       borderRadius: 37,
       marginTop: 20,
+      marginBottom: -15,
     },
     containerRanking: {
       backgroundColor: "#fff",
       width: "100%",
       marginTop: 20,
       marginBottom: 80,
+     
+    },
+    containerBoxPlace: {
+      flexDirection: 'column',
+      marginBottom: 25,
+      width: "100%",
+      height: "70%",
+    },
+    containerMedal: {
+      marginTop: 30,
+      marginBottom: 20,
+      marginLeft: 25,
+      width: "70%",
+      height: "70%",
+      backgroundColor: "#DFDFDF",
+      borderRadius: 40,
     },
     containerPlace: {
       justifyContent: "center",
       alignItems: "center",
       width: "70%",
-      height: "60%",
+      height: "90%",
       backgroundColor: "#2F72BC",
       borderRadius: 40,
       marginTop: 25,
       marginBottom: 20,
-      marginLeft: 50,
+      marginLeft: 70,
+      position: 'absolute',
     },
     containerBotton: {
       justifyContent: "center",
@@ -109,5 +130,3 @@ const styles = StyleSheet.create({
 
 
 export default Ranking;
-
-
