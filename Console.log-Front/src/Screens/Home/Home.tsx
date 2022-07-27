@@ -10,7 +10,7 @@ import {
 import React, { useContext, useState, useEffect } from "react";
 import api from "../../Service/api";
 import { Icon } from "react-native-paper/lib/typescript/components/Avatar/Avatar";
-import { Button, IconButton, Appbar } from "react-native-paper";
+import { Button, IconButton, Appbar, Searchbar } from "react-native-paper";
 
 import AuthUserContext from "../../Contexts/AuthUserContext/context";
 import { ScreenRoutes } from "../../Enums/ScreenRoutes";
@@ -58,13 +58,18 @@ const Home: React.FC = ({ route, navigation }) => {
 
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState<any>([]);
+  const [subjectsToShow, setSubjectsToShow] = useState<any>([]);
   const [quiz, setQuiz] = useState<any>([]);
+  const [quizToShow, setQuizToShow] = useState<any>([]);
   const [showSubjects, setShowSubjects] = useState<boolean>(true);
   const [showQuiz, setShowQuiz] = useState<boolean>(false);
+  const [filtroDisciplinas, setFiltroDisciplinas] = useState("");
+  const [filtroQuizes, setFiltroQuizes] = useState("");
 
   async function loadSUbjects() {
     await api.get("/subjects").then((response) => {
       setSubjects(response.data);
+      setSubjectsToShow(response.data);
     });
   }
 
@@ -73,12 +78,37 @@ const Home: React.FC = ({ route, navigation }) => {
       .get("/quiz", { params: { subject: _id_subject } })
       .then((response) => {
         setQuiz(response.data);
+        setQuizToShow(response.data);
       });
   }
 
   useEffect(() => {
     loadSUbjects();
   }, []);
+
+  const onChangeSearchDisciplina = (value: any) => {
+    setFiltroDisciplinas(value);
+    if (value) {
+      const disciplinasFiltradas = subjects.filter((e: any) => {
+        return e.nm_subject.includes(value);
+      });
+      setSubjectsToShow(disciplinasFiltradas);
+    } else {
+      setSubjectsToShow(subjects);
+    }
+  };
+
+  const onChangeSearchQuiz = (value: any) => {
+    setFiltroQuizes(value);
+    if (value) {
+      const quizesFiltrados = quiz.filter((e: any) => {
+        return e.title.includes(value);
+      });
+      setQuizToShow(quizesFiltrados);
+    } else {
+      setQuizToShow(quiz);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -91,43 +121,55 @@ const Home: React.FC = ({ route, navigation }) => {
       )}
 
       {showSubjects && (
-        <FlatList
-          style={{ width: "100%" }}
-          data={subjects}
-          renderItem={({ item }) => (
-            <TouchableOpacity
-              style={{
-                margin: 5,
-                flex: 1,
-                flexDirection: "row",
-                justifyContent: "center",
-                borderBottomWidth: 1,
-              }}
-              onPress={() => {
-                setShowSubjects(false);
-                setShowQuiz(true);
-                setSubject(item.nm_subject);
-                loadQuiz(item._id);
-              }}
-            >
-              {
-                <Image
-                  style={{ width: 50, height: 50, margin: 10 }}
-                  source={require("../../Assets/logo_ufjf.jpg")}
-                />
-              }
-              <View style={styles.flatListContent}>
-                <Text style={styles.text2}>{item.nm_subject}</Text>
-              </View>
-            </TouchableOpacity>
-          )}
-        />
+        <>
+          <Searchbar
+            placeholder="Busque uma disciplina"
+            onChangeText={onChangeSearchDisciplina}
+            value={filtroDisciplinas}
+          />
+          <FlatList
+            style={{ width: "100%" }}
+            data={subjectsToShow}
+            renderItem={({ item }) => (
+              <TouchableOpacity
+                style={{
+                  margin: 5,
+                  flex: 1,
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  borderBottomWidth: 1,
+                }}
+                onPress={() => {
+                  setShowSubjects(false);
+                  setShowQuiz(true);
+                  setSubject(item.nm_subject);
+                  loadQuiz(item._id);
+                }}
+              >
+                {
+                  <Image
+                    style={{ width: 50, height: 50, margin: 10 }}
+                    source={require("../../Assets/logo_ufjf.jpg")}
+                  />
+                }
+                <View style={styles.flatListContent}>
+                  <Text style={styles.text2}>{item.nm_subject}</Text>
+                </View>
+              </TouchableOpacity>
+            )}
+          />
+        </>
       )}
       {showQuiz && (
         <>
+          <Searchbar
+            placeholder="Busque um quiz"
+            onChangeText={onChangeSearchQuiz}
+            value={filtroQuizes}
+          />
           <FlatList
             style={{ width: "100%" }}
-            data={quiz}
+            data={quizToShow}
             ListEmptyComponent={
               <Text style={{ alignSelf: "center", fontSize: 18, color: "red" }}>
                 Ainda não possui nenhum Quiz para essa disciplina
