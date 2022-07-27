@@ -1,6 +1,10 @@
-import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import { View, Text, StyleSheet, Image, FlatList,} from "react-native";
 import React, { useContext } from "react";
 import AuthUserContext from "../../Contexts/AuthUserContext/context";
+import MedalIcon from 'react-native-vector-icons/FontAwesome5';
+//import EditIcon from 'react-native-vector-icons/AntDesign';
+
+
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Profile: React.FC = ({ route, navigation }) => {
@@ -45,6 +49,7 @@ const Profile: React.FC = ({ route, navigation }) => {
             data={medalhas}
             renderItem={({ item }) => (
               <View style={styles.conteinerContextMedalhas}>
+                 <MedalIcon style={styles.iconMedalhas} name="medal" size={30} color="#562402" />
                 <Text style={styles.textoInfoMedalha}>{item}</Text>
               </View>
             )}
@@ -106,6 +111,7 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   conteinerContextMedalhas: {
+    flexDirection: "row",
     marginLeft: 20,
     backgroundColor: "#FFBC2B",
     width: "90%",
@@ -122,6 +128,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     borderRadius: 150,
     margin: 5,
+  },
+  iconMedalhas:{
+    marginRight: 20,
   },
   textoNome: {
     fontSize: 20,
