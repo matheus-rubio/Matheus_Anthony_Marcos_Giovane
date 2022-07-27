@@ -52,8 +52,20 @@ const DrawerStack: React.FC = () => {
           drawerItemStyle: { display: "none" },
         }}
       />
-      <Drawer.Screen name={ScreenRoutes.NEWQUIZ} component={NewQuiz} />
-      <Drawer.Screen name={ScreenRoutes.RANKING} component={Ranking} />
+      <Drawer.Screen
+        name={ScreenRoutes.NEWQUIZ}
+        component={NewQuiz}
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
+      <Drawer.Screen
+        name={ScreenRoutes.RANKING}
+        component={Ranking}
+        options={{
+          drawerItemStyle: { display: "none" },
+        }}
+      />
     </Drawer.Navigator>
   );
 };
