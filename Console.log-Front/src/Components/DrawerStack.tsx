@@ -62,6 +62,7 @@ const DrawerStack: React.FC = () => {
       <Drawer.Screen
         name={ScreenRoutes.RANKING}
         component={Ranking}
+        initialParams={{ id_ranking: null }}
         options={{
           drawerItemStyle: { display: "none" },
         }}

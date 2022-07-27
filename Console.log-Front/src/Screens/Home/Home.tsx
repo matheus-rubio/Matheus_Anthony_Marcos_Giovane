@@ -197,6 +197,17 @@ const Home: React.FC = ({ route, navigation }) => {
                 <View style={styles.flatListContent}>
                   <Text style={styles.text2}>{item.title}</Text>
                 </View>
+
+                <IconButton
+                  icon="gamepad-variant"
+                  size={45}
+                  color="#2F72BC"
+                  onPress={() => {
+                    navigation.navigate("Ranking", {
+                      params: { id_ranking: item._id },
+                    });
+                  }}
+                />
               </TouchableOpacity>
             )}
           />
