@@ -66,6 +66,15 @@ const Home: React.FC = ({ route, navigation }) => {
   const [filtroDisciplinas, setFiltroDisciplinas] = useState("");
   const [filtroQuizes, setFiltroQuizes] = useState("");
 
+  const saveQuiz = async (quizId: any) => {
+    await api
+      .post(`/save/${user?.id}`, { id_quiz: quizId })
+      .then((response) => {
+        setSubjects(response.data);
+        setSubjectsToShow(response.data);
+      });
+  };
+
   async function loadSUbjects() {
     await api.get("/subjects").then((response) => {
       setSubjects(response.data);
@@ -199,14 +208,19 @@ const Home: React.FC = ({ route, navigation }) => {
                 </View>
 
                 <IconButton
-                  icon="gamepad-variant"
+                  icon="trophy"
                   size={45}
-                  color="#2F72BC"
+                  color="#E4B423"
                   onPress={() => {
                     navigation.navigate("Ranking", {
                       params: { id_ranking: item._id },
                     });
                   }}
+                />
+                <IconButton
+                  icon="bookmark-outline"
+                  size={30}
+                  onPress={() => saveQuiz(item._id)}
                 />
               </TouchableOpacity>
             )}

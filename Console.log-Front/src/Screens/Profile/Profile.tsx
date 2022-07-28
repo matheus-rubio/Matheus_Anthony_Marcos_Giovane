@@ -1,14 +1,12 @@
-import { View, Text, StyleSheet, Image, FlatList,} from "react-native";
-import React, { useContext } from "react";
+import { View, Text, StyleSheet, Image, FlatList } from "react-native";
+import React, { useContext, useState } from "react";
 import AuthUserContext from "../../Contexts/AuthUserContext/context";
-import MedalIcon from 'react-native-vector-icons/FontAwesome5';
-//import EditIcon from 'react-native-vector-icons/AntDesign';
-
-
+import { Switch } from "react-native-paper";
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Profile: React.FC = ({ route, navigation }) => {
   const { user } = useContext(AuthUserContext);
+  const [isSwitchOn, setIsSwitchOn] = useState<boolean>(false);
   const image = user?.profile_picture
     ? {
         uri: `data:image/jpg;base64,${Buffer.from(
@@ -17,7 +15,7 @@ const Profile: React.FC = ({ route, navigation }) => {
         ).toString()}`,
       }
     : require("../../Assets/no-profile-photo.jpg");
-    const medal = require("../../Assets/medal.svg");
+  const medal = require("../../Assets/medal.svg");
 
   const medalhas = [
     "Top 1 - Estrutura de dados",
@@ -32,6 +30,10 @@ const Profile: React.FC = ({ route, navigation }) => {
     "Top 3 - Lógica",
   ];
 
+  const onToggleSwitch = () => {
+    setIsSwitchOn(!isSwitchOn);
+  };
+
   return (
     <View style={styles.container}>
       <View style={styles.containerHeader}></View>
@@ -43,18 +45,38 @@ const Profile: React.FC = ({ route, navigation }) => {
         <View style={styles.containerInformation}>
           <View style={styles.containerInformationInside}>
             <Text style={styles.textoMdelha}>Medalhas</Text>
-            <Text style={styles.textoQuiz}>Quizes</Text>
+            <Switch
+              value={isSwitchOn}
+              onValueChange={onToggleSwitch}
+              color={"#2F72BC"}
+              style={{ alignSelf: "center", justifyContent: "center" }}
+            />
+            <Text style={styles.textoQuiz}>Quizes salvos</Text>
           </View>
-          <FlatList
-            style={styles.containerMedalhas}
-            data={medalhas}
-            renderItem={({ item }) => (
-              <View style={styles.conteinerContextMedalhas}>
+          {!isSwitchOn && (
+            <FlatList
+              style={styles.containerMedalhas}
+              data={medalhas}
+              renderItem={({ item }) => (
+                <View style={styles.conteinerContextMedalhas}>
                   <Image style={styles.medal} source={medal} />
-                <Text style={styles.textoInfoMedalha}>{item}</Text>
-              </View>
-            )}
-          />
+                  <Text style={styles.textoInfoMedalha}>{item}</Text>
+                </View>
+              )}
+            />
+          )}
+          {isSwitchOn && (
+            <FlatList
+              style={styles.containerMedalhas}
+              data={medalhas}
+              renderItem={({ item }) => (
+                <View style={styles.conteinerContextMedalhas}>
+                  <Image style={styles.medal} source={medal} />
+                  <Text style={styles.textoInfoMedalha}>{item}</Text>
+                </View>
+              )}
+            />
+          )}
         </View>
       </View>
     </View>
@@ -94,7 +116,7 @@ const styles = StyleSheet.create({
   },
   containerInformationInside: {
     flexDirection: "row",
-    justifyContent: "center",
+    justifyContent: "space-between",
     alignItems: "center",
     backgroundColor: "#fff",
     borderRadius: 30,
@@ -134,7 +156,7 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  iconMedalhas:{
+  iconMedalhas: {
     marginRight: 20,
   },
   textoNome: {
@@ -145,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
   },
   textoMdelha: {
-    marginRight: 120,
+    marginLeft: 40,
     color: "#FFB200",
   },
   textoInfoMedalha: {
@@ -153,6 +175,7 @@ const styles = StyleSheet.create({
     marginLeft: 5,
   },
   textoQuiz: {
+    marginRight: 20,
     color: "#2F72BC",
   },
 });

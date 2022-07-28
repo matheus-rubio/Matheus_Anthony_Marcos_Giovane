@@ -51,12 +51,16 @@ export class UserService {
 
       const accessToken: string = await this.jwtService.sign(payload);
 
+      console.log(user);
+
       const userReturn = {
+        id: user._id,
         nm_user: user.nm_user,
         email: user.email,
         type: user.type,
         accessToken,
         profile_picture: user.profile_picture,
+        saved_quizes: user.saved_quizes,
       };
       return userReturn;
     } else {
