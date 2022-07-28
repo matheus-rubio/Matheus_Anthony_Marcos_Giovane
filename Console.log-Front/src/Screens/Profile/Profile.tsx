@@ -17,6 +17,7 @@ const Profile: React.FC = ({ route, navigation }) => {
         ).toString()}`,
       }
     : require("../../Assets/no-profile-photo.jpg");
+    const medal = require("../../Assets/medal.svg");
 
   const medalhas = [
     "Top 1 - Estrutura de dados",
@@ -49,7 +50,7 @@ const Profile: React.FC = ({ route, navigation }) => {
             data={medalhas}
             renderItem={({ item }) => (
               <View style={styles.conteinerContextMedalhas}>
-                 <MedalIcon style={styles.iconMedalhas} name="medal" size={30} color="#562402" />
+                  <Image style={styles.medal} source={medal} />
                 <Text style={styles.textoInfoMedalha}>{item}</Text>
               </View>
             )}
@@ -129,6 +130,10 @@ const styles = StyleSheet.create({
     borderRadius: 150,
     margin: 5,
   },
+  medal: {
+    width: 30,
+    height: 30,
+  },
   iconMedalhas:{
     marginRight: 20,
   },
@@ -145,6 +150,7 @@ const styles = StyleSheet.create({
   },
   textoInfoMedalha: {
     fontSize: 20,
+    marginLeft: 5,
   },
   textoQuiz: {
     color: "#2F72BC",
