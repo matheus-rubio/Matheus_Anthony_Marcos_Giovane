@@ -7,11 +7,14 @@ import * as bcrypt from 'bcrypt';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
 import { JwtService } from '@nestjs/jwt';
 import { JwtPayload } from './jwt-payload.interface';
+import { Quiz, QuizDocument } from 'src/quiz.module/quiz.schema';
 @Injectable()
 export class UserService {
   constructor(
     @InjectModel(User.name)
     private userModel: Model<UserDocument>,
+    @InjectModel(Quiz.name)
+    private quizModel: Model<QuizDocument>,
     private jwtService: JwtService,
   ) {}
 
@@ -58,6 +61,35 @@ export class UserService {
       return userReturn;
     } else {
       throw new UnauthorizedException('Please chacke your login credentials');
+    }
+  }
+
+  async save(id: string, id_quiz: string): Promise<true | Error> {
+    try {
+      const quiz = await this.quizModel.findById(id_quiz);
+      const user = await this.userModel.findByIdAndUpdate(
+        id,
+        {
+          $push: {
+            saved_quizes: quiz,
+          },
+        },
+        { new: true, useFindAndModify: false },
+      );
+      console.log(user);
+      return true;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  async saveList(id: string): Promise<any | Error> {
+    try {
+      const user = await this.userModel.findById(id);
+      console.log(user);
+      return user;
+    } catch (error) {
+      return error;
     }
   }
 }

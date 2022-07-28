@@ -4,10 +4,12 @@ import {
   Get,
   HttpException,
   HttpStatus,
+  Param,
   Post,
   Res,
 } from '@nestjs/common';
 import { AuthCredentialsDto } from './dto/auth-credential.dto';
+import { SaveDTO } from './dto/save.dto';
 import { UserCreateDto } from './dto/userCreate.dto';
 import { User } from './user.schema';
 import { UserService } from './user.service';
@@ -42,5 +44,21 @@ export class UserController {
     @Body() authCredentialsDto: AuthCredentialsDto,
   ): Promise<{ accessToken: string }> {
     return this.userService.signIn(authCredentialsDto);
+  }
+
+  @Post('/save/:id')
+  saveQuiz(
+    @Param('id') id: string,
+    @Body() data: SaveDTO,
+  ): Promise<true | Error> {
+    const { id_quiz } = data;
+    console.log(data);
+    return this.userService.save(id, id_quiz);
+  }
+
+  @Get('/save/:id')
+  saveList(@Param('id') id: string): Promise<true | Error> {
+    console.log(id);
+    return this.userService.saveList(id.toString());
   }
 }
