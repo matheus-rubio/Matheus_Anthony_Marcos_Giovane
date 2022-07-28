@@ -4,12 +4,18 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import React, { useContext, useEffect, useState } from "react";
 import { RouteProp } from "@react-navigation/native";
 import AuthUserContext from "../../Contexts/AuthUserContext/context";
 import { ScreenRoutes } from "../../Enums/ScreenRoutes";
 import { NavigationScreenProp } from "react-navigation";
+import api from "../../Service/api";
+const gold = require("../../Assets/gold.svg");
+const silver = require("../../Assets/silver.svg");
+const bronze = require("../../Assets/bronze.svg");
+const emoji = require("../../Assets/emoji.svg");
 
 type RootParamList = {
   Home: undefined;
@@ -31,49 +37,49 @@ type Props = {
 const Ranking: React.FC = ({ route, navigation }: Props) => {
   const { user } = useContext(AuthUserContext);
   const [rankingID, setRanking] = useState("");
+  const [rankings, setRankings] = useState<any>([]);
+  const [rankingNm, setRankingNm] = useState<any>([]);
   const image =
     user?.type === "S"
       ? require("../../Assets/aluno.png")
       : require("../../Assets/professor.jpg");
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (route.params) {
       const { params } = route.params;
       setRanking(params.id_ranking);
-      console.log(rankingID);
+      load(params.id_ranking);
     }
-  }, [route.params]);
+  }, []);
 
-  const ranking = [
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-    "Thomás Causin: 5 pts",
-  ];
+  async function load(id: string) {
+    await api.get(`/ranking/${id}`, { params: { id: id } }).then((response) => {
+      console.log("DEU BOM aaaa");
+      setRankings(response.data);
+      setRankingNm(response.data[0].quiz.title);
+    });
+  }
 
   return (
     <View style={styles.containerPrincipal}>
       <View style={styles.containerInfoCurso}>
-        <Text style={styles.textInfoCurso}>Algoritmos de Ordenação</Text>
+        <Text style={styles.textInfoCurso}>{rankingNm}</Text>
       </View>
       <FlatList
         style={styles.containerRanking}
-        data={ranking}
-        renderItem={({ item }) => (
+        data={rankings}
+        renderItem={({ item, index }) => (
           <View style={styles.containerBoxPlace}>
-            <View style={styles.containerMedal}></View>
+            <View style={styles.containerMedal}>
+              {index == 0 && <Image style={styles.medal} source={gold} />}
+              {index == 1 && <Image style={styles.medal} source={silver} />}
+              {index == 2 && <Image style={styles.medal} source={bronze} />}
+              {index > 2 && <Image style={styles.medal} source={emoji} />}
+            </View>
             <View style={styles.containerPlace}>
-              <Text style={styles.textPlace}>{item}</Text>
+              <Text style={styles.textPlace}>
+                {item.user}: {item.points} pontos
+              </Text>
             </View>
           </View>
         )}
@@ -113,6 +119,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 80,
   },
+  medal: {
+    width: 40,
+    height: 35,
+  },
   containerBoxPlace: {
     flexDirection: "column",
     marginBottom: 25,
@@ -123,10 +133,12 @@ const styles = StyleSheet.create({
     marginTop: 30,
     marginBottom: 20,
     marginLeft: 25,
-    width: "70%",
-    height: "70%",
+    width: "80%",
+    height: "78%",
     backgroundColor: "#DFDFDF",
     borderRadius: 40,
+    justifyContent: "center",
+    paddingLeft: 6,
   },
   containerPlace: {
     justifyContent: "center",

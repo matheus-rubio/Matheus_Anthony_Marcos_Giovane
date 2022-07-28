@@ -11,9 +11,8 @@ export class Ranking {
   @Prop({ required: true })
   points: number;
 
-  @Prop({ type: mongoose.Schema.Types.ObjectId, ref: User.name })
-  @Type(() => User)
-  user: User;
+  @Prop({ required: true })
+  user: string;
 
   @Prop({ type: Quiz })
   @Type(() => Quiz)

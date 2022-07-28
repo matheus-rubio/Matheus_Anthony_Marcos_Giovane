@@ -27,7 +27,7 @@ export class RankingService {
 
       const createRanking = new this.rankingModel({
         quiz: quizSubject,
-        user: userSubject,
+        user: userSubject.nm_user,
         points: ranking.points,
       });
 
