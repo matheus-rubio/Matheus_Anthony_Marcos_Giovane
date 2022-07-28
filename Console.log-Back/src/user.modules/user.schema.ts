@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { Document } from 'mongoose';
+import { Type } from 'class-transformer';
+import mongoose, { Document } from 'mongoose';
 import { Quiz } from 'src/quiz.module/quiz.schema';
 
 export type UserDocument = User & Document;
@@ -21,7 +22,11 @@ export class User {
   @Prop({ required: true, unique: true })
   registration: string;
 
-  @Prop({ type: Quiz })
+  @Prop({
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: Quiz.name,
+  })
+  @Type(() => Quiz)
   saved_quizes: Quiz[];
 
   @Prop({ type: Date, default: Date.now })

@@ -89,8 +89,12 @@ export class UserService {
 
   async saveList(id: string): Promise<any | Error> {
     try {
-      const user = await this.userModel.findById(id);
-      console.log(user);
+      const user = await this.userModel
+        .findOne({ _id: id })
+        .populate('saved_quizes')
+        .exec();
+
+      console.log(user.saved_quizes);
       return user;
     } catch (error) {
       return error;
